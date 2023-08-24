@@ -1,0 +1,50 @@
+<form action="" [formGroup]="miFormulario">
+    <div class="form-control-lg" style="width: 45%; margin: 0 auto;">
+        <input formControlName="name" class="form-control form-control-lg" type="text" placeholder="name" aria-label=".form-control-lg example">
+        <input formControlName="description" class="form-control form-control-lg" type="text" placeholder="description" aria-label=".form-control-lg example">
+        <input formControlName="location" class="form-control form-control-lg" type="text" placeholder="location" aria-label=".form-control-lg example">
+        <input formControlName="followers" class="form-control form-control-lg" type="number" placeholder="followers" aria-label=".form-control-lg example">
+        
+    </div>
+    <div class="form-control-lg" style="width: auto ; margin: 0 auto; display: flex; justify-content: center;">
+        <button type="button" class="btn btn-success" (click)="Create()" >Guardar</button>
+        <button *ngIf="editActive" type="button" class="btn btn-primary" (click)="Update()">Editar</button>
+        <button type="button" class="btn btn-secondary" (click)="clearForm()">Clear</button>
+    </div>
+
+</form>
+<button type="button" class="btn btn-info"  (click)="OrdenarTabla()">Ordenar</button>
+<input type="text" [(ngModel)]="searchText" placeholder="Search by Name" />
+<div >
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Location</th>
+            <th scope="col">Followers</th>
+            <th scope="col"> Action </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+          *ngFor="let item of array | filter: searchText"
+          >
+            <th >{{item.id}}</th>
+            <th >{{item.name}}</th>
+            <th ><img style="width: 200px;" src="{{item.description}}" alt=""></th>
+            <th >{{item.location}}</th>
+            <th >{{item.followers}}</th>
+            <td>
+                <button type="button" class="btn btn-danger" (click)="Destroy(item.id)">Delete</button>
+                <button type="button" class="btn btn-primary" (click)="Show(item.id)">Edit</button>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+
+
